@@ -1,0 +1,36 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm typecheck
+      - run: docker compose up -d --wait
+      - run: cp apps/api/.env.example apps/api/.env
+      - run: pnpm db:migrate
+      - run: pnpm test
+      - name: The committed API description matches the routes
+        run: pnpm openapi && git diff --exit-code apps/api/openapi.json
+      - run: pnpm build
+      - run: pnpm --filter @paysplit/e2e exec playwright install --with-deps chromium
+      - run: pnpm e2e
+      - uses: actions/upload-artifact@v5
+        if: failure()
+        with:
+          name: playwright
+          path: e2e/test-results

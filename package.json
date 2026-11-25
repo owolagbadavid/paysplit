@@ -1,0 +1,29 @@
+{
+  "name": "paysplit",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.5.2",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "infra:up": "docker compose up -d --wait",
+    "infra:down": "docker compose down",
+    "dev": "pnpm --parallel --filter \"./apps/*\" --filter \"./tools/*\" dev",
+    "build": "pnpm --filter @paysplit/web build && pnpm --filter @paysplit/api build",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r test",
+    "db:generate": "pnpm --filter @paysplit/api db:generate",
+    "db:migrate": "pnpm --filter @paysplit/api db:migrate",
+    "admin:create": "pnpm --filter @paysplit/api admin:create",
+    "openapi": "pnpm --filter @paysplit/api openapi",
+    "sandbox:check": "pnpm --filter @paysplit/api sandbox:check",
+    "format": "prettier --write .",
+    "e2e": "pnpm --filter @paysplit/e2e e2e"
+  },
+  "devDependencies": {
+    "prettier": "^3.9.0",
+    "typescript": "^7.0.2",
+    "@types/node": "^24.0.0"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "name": "@paysplit/api",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch --env-file-if-exists=.env src/server.ts",
+    "start:emulated": "tsx --env-file=.env.example src/server.ts",
+    "db:migrate:emulated": "tsx --env-file=.env.example src/cli/migrate.ts",
+    "admin:create:emulated": "tsx --env-file=.env.example src/cli/create-admin.ts",
+    "build": "tsup",
+    "start": "node dist/server.js",
+    "typecheck": "tsc -p .",
+    "test": "vitest run",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "tsx --env-file-if-exists=.env src/cli/migrate.ts",
+    "admin:create": "tsx --env-file-if-exists=.env src/cli/create-admin.ts",
+    "openapi": "tsx --env-file-if-exists=.env src/cli/openapi.ts",
+    "sandbox:check": "tsx --env-file-if-exists=.env src/cli/sandbox-check.ts"
+  },
+  "dependencies": {
+    "@fastify/cookie": "^11.1.0",
+    "@fastify/helmet": "^13.2.0",
+    "@fastify/rate-limit": "^11.3.0",
+    "@fastify/static": "^10.1.0",
+    "@fastify/swagger": "^9.9.0",
+    "@fastify/swagger-ui": "^6.1.0",
+    "@paysplit/core": "workspace:*",
+    "@sentry/node": "^11.17.0",
+    "drizzle-orm": "^0.45.4",
+    "fastify": "^5.12.0",
+    "fastify-type-provider-zod": "^7.0.0",
+    "nodemailer": "^10.6.0",
+    "pdfkit": "^0.21.0",
+    "pino": "^10.4.0",
+    "postgres": "^3.4.7",
+    "zod": "^4.6.0"
+  },
+  "devDependencies": {
+    "@paysplit/emulators": "workspace:*",
+    "@types/nodemailer": "*",
+    "@types/pdfkit": "*",
+    "drizzle-kit": "^0.31.11",
+    "pino-pretty": "^13.0.0",
+    "tsup": "^9.0.0",
+    "tsx": "^4.23.0",
+    "vitest": "^5.1.0"
+  }
+}

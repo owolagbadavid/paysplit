@@ -1,0 +1,105 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/inter';
+
+/* Every colour, radius and shadow in the app comes from here. Values are read off the Figma file. */
+@theme {
+  --font-sans: 'Inter Variable', Inter, system-ui, sans-serif;
+
+  --color-brand: #57a4ef;
+  --color-brand-hover: #4697e6;
+  --color-brand-soft: #e8f3fe;
+  --color-brand-wash: #f5faff;
+  /* Brand blue is too light for text on white, so links use this darker step (5.2:1). */
+  --color-brand-ink: #1a69b8;
+  /* Label on a brand-blue fill: 7.6:1, where white would be 2.6:1. */
+  --color-on-brand: #03182c;
+
+  --color-ink: #111418;
+  --color-muted: #5c6672;
+  --color-line: #e9edf2;
+  --color-line-strong: #cbd3dc;
+  --color-field-line: #8b96a3;
+  --color-canvas: #fbfdff;
+  --color-strip: #f8f9fb;
+
+  --color-good: #12723a;
+  --color-good-soft: #e7f7ed;
+  --color-warn: #8a5200;
+  --color-warn-soft: #fff4e0;
+  --color-bad: #b42318;
+  --color-bad-soft: #fdecea;
+
+  --radius-card: 16px;
+  --radius-field: 10px;
+  --shadow-card: 0 1px 2px rgb(16 24 40 / 4%);
+  --shadow-pop: 0 24px 60px rgb(3 18 38 / 22%);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-line);
+  }
+  html {
+    color-scheme: light;
+  }
+  body {
+    background: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  button,
+  [role='button'] {
+    cursor: pointer;
+  }
+  button:disabled {
+    cursor: not-allowed;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-brand-ink);
+    outline-offset: 2px;
+  }
+  dialog {
+    margin: auto;
+    color: inherit;
+  }
+  dialog::backdrop {
+    background: rgb(8 14 24 / 45%);
+    backdrop-filter: blur(6px);
+  }
+  ::placeholder {
+    color: #6b7684;
+    opacity: 1;
+  }
+}
+
+@layer components {
+  .tile {
+    background: linear-gradient(180deg, #e6f2fe 0%, #f7fbff 78%);
+    border-radius: 14px;
+  }
+  .hero {
+    background:
+      radial-gradient(60% 120% at 12% 100%, rgb(24 92 160 / 55%), transparent 62%),
+      radial-gradient(40% 100% at 78% 0%, rgb(20 60 110 / 45%), transparent 70%), #04070c;
+  }
+  .modal-crown {
+    background:
+      radial-gradient(90% 120% at 50% -40%, rgb(87 164 239 / 32%), transparent 70%),
+      linear-gradient(180deg, #f1f7fe, #fff);
+  }
+  .num {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

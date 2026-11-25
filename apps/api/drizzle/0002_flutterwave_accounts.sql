@@ -1,0 +1,3 @@
+ALTER TABLE "paysplit"."salary_accounts" DROP CONSTRAINT "salary_accounts_account_number_unique";--> statement-breakpoint
+CREATE UNIQUE INDEX "salary_accounts_provider_account" ON "paysplit"."salary_accounts" USING btree ("provider","provider_account_id");--> statement-breakpoint
+CREATE UNIQUE INDEX "salary_accounts_provider_customer" ON "paysplit"."salary_accounts" USING btree ("provider","provider_customer_code");
